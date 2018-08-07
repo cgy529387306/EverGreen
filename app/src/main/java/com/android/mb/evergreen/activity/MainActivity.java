@@ -55,15 +55,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     private void showPager(int position){
         if (position==0){
+            iv_camera.setVisibility(View.VISIBLE);
+            iv_camera.setImageResource(R.mipmap.ic_camera);
             tv_title.setText(R.string.mb_home_text);
         }else if (position==1){
+            iv_camera.setVisibility(View.VISIBLE);
+            iv_camera.setImageResource(R.mipmap.ic_add);
             tv_title.setText(R.string.mb_type_text);
         }else if (position==2){
+            iv_camera.setVisibility(View.GONE);
             tv_title.setText(R.string.mb_history_text);
         }else if (position==3){
+            iv_camera.setVisibility(View.GONE);
             tv_title.setText(R.string.mb_version_text);
         }
-        iv_camera.setVisibility(position==0?View.VISIBLE:View.GONE);
+
         btn_home.setSelected(position==0);
         btn_type.setSelected(position==1);
         btn_history.setSelected(position==2);

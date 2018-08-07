@@ -13,7 +13,7 @@ import com.android.mb.evergreen.utils.Helper;
  *
  */
 public class MBApplication extends Application {
-	
+
 	private static final String TAG = MBApplication.class.getSimpleName();
 	
 	private static Context sInstance;
