@@ -2,8 +2,8 @@ package com.android.mb.evergreen.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.mb.evergreen.R;
@@ -14,12 +14,13 @@ import com.android.mb.evergreen.widget.FragmentViewPager;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     private FragmentViewPager fragmentViewPager;
     private ArrayList<Fragment> fragmentList;
     private TextView btn_home,btn_type,btn_history,btn_version;
     private TextView tv_title;
+    private ImageView iv_camera;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_history = findViewById(R.id.btn_history);
         btn_version = findViewById(R.id.btn_version);
         tv_title = findViewById(R.id.tv_title);
+        iv_camera = findViewById(R.id.iv_camera);
         fragmentViewPager = (FragmentViewPager) findViewById(R.id.fragmentViewPager);
 
         fragmentList = new ArrayList<>();
@@ -46,20 +48,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_type.setOnClickListener(this);
         btn_history.setOnClickListener(this);
         btn_version.setOnClickListener(this);
+        iv_camera.setOnClickListener(this);
         showPager(0);
     }
 
 
     private void showPager(int position){
         if (position==0){
-            tv_title.setText("首页");
+            tv_title.setText(R.string.mb_home_text);
         }else if (position==1){
-            tv_title.setText("样品种类");
+            tv_title.setText(R.string.mb_type_text);
         }else if (position==2){
-            tv_title.setText("历史数据");
+            tv_title.setText(R.string.mb_history_text);
         }else if (position==3){
-            tv_title.setText("版本更新");
+            tv_title.setText(R.string.mb_version_text);
         }
+        iv_camera.setVisibility(position==0?View.VISIBLE:View.GONE);
         btn_home.setSelected(position==0);
         btn_type.setSelected(position==1);
         btn_history.setSelected(position==2);
@@ -86,6 +90,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_version:
                 showPager(3);
                 break;
+            case R.id.iv_camera:
+
+                break;
             default:
                 break;
         }
@@ -97,12 +104,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         if (System.currentTimeMillis() - mLastClickTimeMills > DOUBLE_CLICK_INTERVAL) {
-            ToastHelper.showToast("再按一次返回退出");
+            ToastHelper.showToast(getString(R.string.mb_exit_hint));
             mLastClickTimeMills = System.currentTimeMillis();
             return;
         }
         finish();
     }
-
-    // endregion 双击返回
 }

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">EverGreen</string>
+    <string name="mb_home_text">首页</string>
+    <string name="mb_type_text">样品种类</string>
+    <string name="mb_history_text">历史数据</string>
+    <string name="mb_version_text">版本更新</string>
+    <string name="mb_exit_hint">再按一次返回退出</string>
 </resources>

@@ -17,7 +17,7 @@ public class MBApplication extends Application {
 	private static final String TAG = MBApplication.class.getSimpleName();
 	
 	private static Context sInstance;
-	
+
 	/**
 	 * 获取全局Application对象
 	 * @since 2013.08.02 修改错误提示内容为Application by pcqpcq
@@ -44,5 +44,7 @@ public class MBApplication extends Application {
 		super.onCreate();
 		sInstance = this;
 	}
-	
+
+
+
 }

@@ -17,7 +17,14 @@
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:text="样品检测"/>
+            android:text="@string/mb_home_text"/>
+        <ImageView
+            android:id="@+id/iv_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:padding="10dp"
+            android:src="@mipmap/ic_camera"/>
     </FrameLayout>
     <com.android.mb.evergreen.widget.FragmentViewPager
         android:id="@+id/fragmentViewPager"
@@ -42,7 +49,7 @@
             android:drawableTop="@drawable/tab_menu_home"
             android:textColor="@color/main_tab_selector"
             android:textSize="13sp"
-            android:text="首页" />
+            android:text="@string/mb_home_text"/>
 
         <TextView
             android:id="@+id/btn_type"
@@ -51,10 +58,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center_horizontal"
-            android:drawableTop="@drawable/tab_menu_home"
+            android:drawableTop="@drawable/tab_menu_type"
             android:textColor="@color/main_tab_selector"
             android:textSize="13sp"
-            android:text="样品种类" />
+            android:text="@string/mb_type_text" />
 
         <TextView
             android:id="@+id/btn_history"
@@ -63,10 +70,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center_horizontal"
-            android:drawableTop="@drawable/tab_menu_home"
+            android:drawableTop="@drawable/tab_menu_history"
             android:textColor="@color/main_tab_selector"
             android:textSize="13sp"
-            android:text="历史数据" />
+            android:text="@string/mb_history_text" />
         <TextView
             android:id="@+id/btn_version"
             android:layout_width="0dp"
@@ -74,9 +81,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center_horizontal"
-            android:drawableTop="@drawable/tab_menu_home"
+            android:drawableTop="@drawable/tab_menu_version"
             android:textColor="@color/main_tab_selector"
             android:textSize="13sp"
-            android:text="版本更新" />
+            android:text="@string/mb_version_text" />
     </LinearLayout>
 </LinearLayout>
