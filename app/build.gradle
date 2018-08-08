@@ -26,9 +26,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
+    compile "com.android.support:recyclerview-v7:27.1.1"
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'org.greenrobot:greendao:3.2.2' // add library
     compile 'org.greenrobot:greendao-generator:3.2.2'
-    compile 'com.wuxiaolong.pullloadmorerecyclerview:library:1.1.2'
-
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 }

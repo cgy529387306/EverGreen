@@ -4,13 +4,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.mb.evergreen.R;
 import com.android.mb.evergreen.adapter.MyFragmentPagerAdapter;
+import com.android.mb.evergreen.fragment.CategoryFragment;
+import com.android.mb.evergreen.fragment.HistoryFragment;
 import com.android.mb.evergreen.fragment.HomeFragment;
 import com.android.mb.evergreen.utils.ToastHelper;
 import com.android.mb.evergreen.widget.FragmentViewPager;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.ArrayList;
 
@@ -21,6 +25,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private TextView btn_home,btn_type,btn_history,btn_version;
     private TextView tv_title;
     private ImageView iv_camera;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +44,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
         fragmentList = new ArrayList<>();
         fragmentList.add(new HomeFragment());
-        fragmentList.add(new HomeFragment());
-        fragmentList.add(new HomeFragment());
+        fragmentList.add(new CategoryFragment());
+        fragmentList.add(new HistoryFragment());
         fragmentList.add(new HomeFragment());
         fragmentViewPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fragmentList));
         fragmentViewPager.setOffscreenPageLimit(fragmentList.size());
@@ -51,7 +56,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         iv_camera.setOnClickListener(this);
         showPager(0);
     }
-
 
     private void showPager(int position){
         if (position==0){
