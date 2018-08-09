@@ -3,6 +3,7 @@ package com.android.mb.evergreen.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +50,7 @@ public class HomeFragment extends Fragment {
     private void initViews(View view){
         mRecyclerView = (RecyclerView) view.findViewById(R.id.pullLoadMoreRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
         mAdapter = new ExamineAdapter(R.layout.item_examine,getData());
         mAdapter.addHeaderView(LayoutInflater.from(getActivity()).inflate(R.layout.header_home, null));

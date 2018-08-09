@@ -14,8 +14,10 @@ import com.android.mb.evergreen.R;
 import com.android.mb.evergreen.adapter.ExamineAdapter;
 import com.android.mb.evergreen.adapter.HistoryAdapter;
 import com.android.mb.evergreen.entity.Examine;
+import com.android.mb.evergreen.utils.Helper;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -55,11 +57,13 @@ public class HistoryFragment extends Fragment {
 
 
     private List<Examine> getData(){
-        List<Examine> list = new ArrayList<>();
+        List<Examine> dataList = new ArrayList<>();
         for (int i=0;i<100;i++){
-            list.add(new Examine());
+            Examine examine = new Examine();
+            examine.setName("检测编号："+i+"   检测时间："+ Helper.date2String(new Date()));
+            dataList.add(examine);
         }
-        return list;
+        return dataList;
     }
 
 
