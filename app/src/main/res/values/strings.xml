@@ -5,4 +5,7 @@
     <string name="mb_history_text">历史数据</string>
     <string name="mb_version_text">版本更新</string>
     <string name="mb_exit_hint">再按一次返回退出</string>
+    <string name="mb_test">样品检测</string>
+    <string name="dialog_positive">确 定</string>
+    <string name="dialog_negative">取 消</string>
 </resources>

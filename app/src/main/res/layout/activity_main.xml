@@ -19,7 +19,7 @@
             android:textSize="20sp"
             android:text="@string/mb_home_text"/>
         <ImageView
-            android:id="@+id/iv_camera"
+            android:id="@+id/iv_action"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="right"

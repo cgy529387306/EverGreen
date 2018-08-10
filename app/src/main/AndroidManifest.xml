@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.mb.evergreen">
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:name=".app.MBApplication"
         android:allowBackup="true"
@@ -19,6 +20,11 @@
         </activity>
         <activity
             android:name=".activity.PhotoPreviewActivity"
+            android:screenOrientation="portrait" />
+        <!--图片多选页面-->
+        <activity
+            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
+            android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait" />
     </application>
 

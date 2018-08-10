@@ -3,6 +3,7 @@ package com.android.mb.evergreen.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,36 +22,26 @@ import java.io.File;
  * @since 2016-05-13
  */
 public class PhotoPreviewActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private final static float RATIO = 0.75f;
-
     private final static String EXTRA_PHOTO = "extra_photo";
-
-    private ImageView mPhotoPreview;
-    private File mPhotoFile;
+    private ImageView mIvPreview;
+    private String mFilePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_preview);
-
-        mPhotoPreview = (ImageView) findViewById(R.id.iv_preview_photo);
-
-        mPhotoFile = (File) getIntent().getSerializableExtra(EXTRA_PHOTO);
-        int requestWidth = (int) (AppHelper.getScreenWidth() * RATIO);
-        int requestHeight = (int) (AppHelper.getScreenHeight() * RATIO);
-        Bitmap bitmap = BitmapUtils.decodeBitmapFromFile(mPhotoFile, requestWidth, requestHeight);//按照屏幕宽高的3/4比例进行缩放显示
-        if (bitmap != null) {
-            int degree = BitmapUtils.getBitmapDegree(mPhotoFile.getAbsolutePath());//检查是否有被旋转，并进行纠正
-            if (degree != 0) {
-                bitmap = BitmapUtils.rotateBitmapByDegree(bitmap, degree);
-            }
-            mPhotoPreview.setImageBitmap(bitmap);
-        }
-
+        initView();
     }
 
-    public static void preview(Activity activity, File file) {
+    private void initView(){
+        mIvPreview = (ImageView) findViewById(R.id.iv_preview_photo);
+        mFilePath = (String) getIntent().getSerializableExtra(EXTRA_PHOTO);
+        Bitmap bitmap = BitmapFactory.decodeFile(mFilePath);
+        mIvPreview.setImageBitmap(bitmap);
+        findViewById(R.id.iv_back).setOnClickListener(this);
+    }
+
+    public static void preview(Activity activity, String file) {
         Intent previewIntent = new Intent(activity, PhotoPreviewActivity.class);
         previewIntent.putExtra(EXTRA_PHOTO, file);
         activity.startActivity(previewIntent);
@@ -59,5 +50,8 @@ public class PhotoPreviewActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         int id = v.getId();
+        if (id == R.id.iv_back){
+            finish();
+        }
     }
 }
