@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/set_pwd"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        android:background="@drawable/background_corners"
+        android:orientation="vertical">
+
+        <com.android.mb.evergreen.widget.ClearableEditText
+            android:id="@+id/edt_user_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:imeOptions="actionNext"
+            android:hint="@string/edt_pwd"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:background="@drawable/border_shape_tv"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_gravity="center"
+        android:text="@string/next"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -5,4 +5,27 @@
     <string name="mb_history_text">历史数据</string>
     <string name="mb_version_text">版本更新</string>
     <string name="mb_exit_hint">再按一次返回退出</string>
+    <string name="mb_test">样品检测</string>
+    <string name="dialog_positive">确 定</string>
+    <string name="dialog_negative">取 消</string>
+    <string name="user_register">新用户注册</string>
+    <string name="user_login">登录</string>
+    <string name="about_us">关于我们</string>
+    <string name="contact_us">联系我们</string>
+    <string name="switch_language">Eng/中文</string>
+    <string name="version_code">版本号</string>
+    <string name="register">注册</string>
+    <string name="edt_phone">*手机号</string>
+    <string name="edt_pwd">密码</string>
+    <string name="edt_comfirmpwd">确认密码</string>
+    <string name="edt_surname">姓</string>
+    <string name="edt_name">名</string>
+    <string name="edt_company">机构名</string>
+    <string name="tv_tip">*必填</string>
+    <string name="haved_login">已有账户？点击登录</string>
+    <string name="forget_pwd">忘记密码</string>
+    <string name="phone_tip">手机号不能为空</string>
+    <string name="edt_loginname">用户名</string>
+    <string name="next">next</string>
+    <string name="set_pwd">设置密码</string>
 </resources>

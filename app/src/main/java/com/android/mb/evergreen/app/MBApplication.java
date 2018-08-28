@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.android.mb.evergreen.utils.Helper;
+import com.facebook.stetho.Stetho;
 
 
 /**
@@ -43,6 +44,7 @@ public class MBApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		sInstance = this;
+		Stetho.initializeWithDefaults(this);
 	}
 
 

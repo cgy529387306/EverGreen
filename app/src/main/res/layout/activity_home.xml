@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/btn_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:background="@drawable/border_shape_tv"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/user_register"/>
+
+    <TextView
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:background="@drawable/border_shape_tv"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/user_login"/>
+
+    <TextView
+        android:id="@+id/btn_aboutus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:background="@drawable/border_shape_tv"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/about_us"/>
+
+    <TextView
+        android:id="@+id/btn_contactus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:background="@drawable/border_shape_tv"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/contact_us"/>
+
+    <TextView
+        android:id="@+id/btn_switchlanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="12sp"
+        android:background="@drawable/border_shape_tv"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/switch_language"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/btn_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="12sp"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:drawableLeft="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/tv_versioncode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="12sp"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:text="@string/version_code"/>
+
+</LinearLayout>
