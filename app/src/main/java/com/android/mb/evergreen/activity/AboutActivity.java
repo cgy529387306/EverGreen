@@ -1,8 +1,6 @@
 package com.android.mb.evergreen.activity;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.view.View;
 
 import com.android.mb.evergreen.R;
@@ -25,7 +23,6 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener{
         findViewById(R.id.btn_exit).setOnClickListener(this);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

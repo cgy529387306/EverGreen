@@ -1,11 +1,10 @@
 package com.android.mb.evergreen.activity;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.view.View;
 
 import com.android.mb.evergreen.R;
+import com.android.mb.evergreen.utils.NavigationHelper;
 
 public class ManagerActivity extends BaseActivity implements View.OnClickListener{
 
@@ -27,7 +26,6 @@ public class ManagerActivity extends BaseActivity implements View.OnClickListene
         findViewById(R.id.btn_back).setOnClickListener(this);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -35,6 +33,7 @@ public class ManagerActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.btn_new_test:
+                NavigationHelper.startActivity(ManagerActivity.this,NewTestActivity.class,null,false);
                 break;
             case R.id.btn_manager_data:
                 break;

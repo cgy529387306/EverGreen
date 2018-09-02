@@ -1,8 +1,6 @@
 package com.android.mb.evergreen.activity;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -34,7 +32,6 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
         mBtnLogin.setOnClickListener(this);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#ffffff</color>
+    <color name="bg_activity">#DCDDDD</color>
     <color name="text_black_1">#202020</color>
     <color name="text_black_2">#333333</color>
     <color name="text_black_3">#424242</color>

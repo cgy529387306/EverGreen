@@ -1,10 +1,7 @@
 package com.android.mb.evergreen.activity;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.view.View;
-import android.widget.TextView;
 
 import com.android.mb.evergreen.R;
 import com.android.mb.evergreen.utils.NavigationHelper;
@@ -31,7 +28,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         findViewById(R.id.btn_back).setOnClickListener(this);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
