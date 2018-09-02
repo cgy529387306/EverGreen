@@ -19,7 +19,7 @@ import com.android.mb.evergreen.R;
  * @see ://shangxun.iteye.com/blog/1938092
  *
  */
-public class ClearableEditText extends EditText implements OnFocusChangeListener, TextWatcher {
+public class CleanableEditText extends EditText implements OnFocusChangeListener, TextWatcher {
 	/** 
      * 删除按钮的引用 
      */  
@@ -29,15 +29,15 @@ public class ClearableEditText extends EditText implements OnFocusChangeListener
      */  
     private boolean mIsFoucs;  
    
-    public ClearableEditText(Context context) {   
+    public CleanableEditText(Context context) {
         this(context, null);   
     }   
    
-    public ClearableEditText(Context context, AttributeSet attrs) {   
+    public CleanableEditText(Context context, AttributeSet attrs) {
         this(context, attrs, android.R.attr.editTextStyle);   
     }   
       
-    public ClearableEditText(Context context, AttributeSet attrs, int defStyle) {  
+    public CleanableEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);  
         init();  
     }  

@@ -4,20 +4,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.view.View;
-import android.widget.TextView;
 
 import com.android.mb.evergreen.R;
 import com.android.mb.evergreen.utils.NavigationHelper;
 
 public class HomeActivity extends BaseActivity implements View.OnClickListener{
-
-    private TextView mBtnRegister;
-    private TextView mBtnLogin;
-    private TextView mBtnAboutUs;
-    private TextView mBtnContactUs;
-    private TextView mBtnSwitchLanguage;
-    private TextView mBtnSetting;
-    private TextView mTvVersionCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,22 +19,15 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
     }
 
     private void initView(){
-        mBtnRegister = findViewById(R.id.btn_register);
-        mBtnLogin = findViewById(R.id.btn_login);
-        mBtnAboutUs = findViewById(R.id.btn_aboutus);
-        mBtnContactUs = findViewById(R.id.btn_contactus);
-        mBtnSwitchLanguage = findViewById(R.id.btn_switchlanguage);
-        mBtnSetting = findViewById(R.id.btn_setting);
-        mTvVersionCode = findViewById(R.id.tv_versioncode);
     }
 
     private void initOnClickListener() {
-        mBtnRegister.setOnClickListener(this);
-        mBtnLogin.setOnClickListener(this);
-        mBtnAboutUs.setOnClickListener(this);
-        mBtnContactUs.setOnClickListener(this);
-        mBtnSwitchLanguage.setOnClickListener(this);
-        mBtnSetting.setOnClickListener(this);
+        findViewById(R.id.btn_register).setOnClickListener(this);
+        findViewById(R.id.btn_login).setOnClickListener(this);
+        findViewById(R.id.btn_about).setOnClickListener(this);
+        findViewById(R.id.btn_contact).setOnClickListener(this);
+        findViewById(R.id.btn_language).setOnClickListener(this);
+        findViewById(R.id.btn_setting).setOnClickListener(this);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -51,20 +35,23 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_register:
-                NavigationHelper.startActivity(HomeActivity.this,RegisterActivity.class,null,true);
+                NavigationHelper.startActivity(HomeActivity.this,RegisterActivity.class,null,false);
                 break;
             case R.id.btn_login:
-                NavigationHelper.startActivity(HomeActivity.this,LoginActivity.class,null,true);
+                NavigationHelper.startActivity(HomeActivity.this,LoginActivity.class,null,false);
                 break;
-            case R.id.btn_aboutus:
+            case R.id.btn_about:
+                NavigationHelper.startActivity(HomeActivity.this,AboutActivity.class,null,false);
                 break;
-            case R.id.btn_contactus:
+            case R.id.btn_contact:
+                NavigationHelper.startActivity(HomeActivity.this,ContactActivity.class,null,false);
                 break;
-            case R.id.btn_switchlanguage:
+            case R.id.btn_language:
+                NavigationHelper.startActivity(HomeActivity.this,LoginActivity.class,null,false);
                 break;
             case R.id.btn_setting:
+                NavigationHelper.startActivity(HomeActivity.this,LoginActivity.class,null,false);
                 break;
-
             default:
                 break;
         }

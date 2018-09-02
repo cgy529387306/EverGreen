@@ -2,118 +2,121 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:background="@mipmap/bg_login"
     android:orientation="vertical">
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/bg_tm_top"
+        android:layout_marginTop="20dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="@string/user_register"/>
-
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:textColor="@color/text_black_1"
+        android:textSize="18sp"
+        android:text="@string/new_user_register"/>
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
         android:padding="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
         android:background="@drawable/background_corners"
         android:orientation="vertical">
-
-        <com.android.mb.evergreen.widget.ClearableEditText
-            android:id="@+id/edt_user_phone"
+        <com.android.mb.evergreen.widget.CleanableEditText
+            android:id="@+id/et_account"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:imeOptions="actionNext"
-            android:hint="@string/edt_phone"
+            android:hint="@string/edt_user_name"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:textSize="14sp" />
-
-        <com.android.mb.evergreen.widget.ClearableEditText
-            android:id="@+id/edt_user_pwd"
+        <com.android.mb.evergreen.widget.CleanableEditText
+            android:id="@+id/et_password"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:imeOptions="actionNext"
-            android:hint="@string/edt_pwd"
+            android:hint="@string/edt_user_name"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:textSize="14sp" />
-
-        <com.android.mb.evergreen.widget.ClearableEditText
-            android:id="@+id/edt_user_comfirmpwd"
+        <com.android.mb.evergreen.widget.CleanableEditText
+            android:id="@+id/et_confirm_pwd"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:imeOptions="actionNext"
-            android:hint="@string/edt_comfirmpwd"
+            android:hint="@string/edt_user_name"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:textSize="14sp" />
-
-        <com.android.mb.evergreen.widget.ClearableEditText
-            android:id="@+id/edt_user_surname"
+        <com.android.mb.evergreen.widget.CleanableEditText
+            android:id="@+id/et_name"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:imeOptions="actionNext"
-            android:hint="@string/edt_surname"
+            android:hint="@string/edt_user_name"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:textSize="14sp" />
-
-        <com.android.mb.evergreen.widget.ClearableEditText
-            android:id="@+id/edt_user_name"
+        <com.android.mb.evergreen.widget.CleanableEditText
+            android:id="@+id/et_org"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:imeOptions="actionNext"
-            android:hint="@string/edt_name"
+            android:hint="@string/edt_user_name"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:textSize="14sp" />
-
-        <com.android.mb.evergreen.widget.ClearableEditText
-            android:id="@+id/edt_user_company"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:imeOptions="actionNext"
-            android:hint="@string/edt_company"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:textSize="14sp" />
-
         <TextView
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textSize="10sp"
-            android:layout_gravity="start"
-            android:text="@string/haved_login"/>
-
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="@color/text_black_1"
+            android:text="@string/has_account"/>
         <TextView
+            android:id="@+id/btn_forget_pwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textSize="10sp"
-            android:layout_gravity="start"
+            android:layout_marginTop="6dp"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="@color/text_black_1"
             android:text="@string/forget_pwd"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textSize="10sp"
-            android:layout_gravity="start"
+            android:layout_marginTop="6dp"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="@color/text_black_1"
             android:text="@string/tv_tip"/>
-
     </LinearLayout>
-
     <TextView
         android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
+        android:layout_marginTop="40dp"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:background="@mipmap/bg_button"
+        android:layout_gravity="center"
+        android:textColor="@color/text_black_1"
         android:text="@string/register"/>
-
-
-
+    <TextView
+        android:id="@+id/btn_back"
+        android:layout_width="64dp"
+        android:layout_height="26dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/text_black_1"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:background="@mipmap/bg_button"
+        android:layout_gravity="right"
+        android:text="@string/back"/>
 </LinearLayout>

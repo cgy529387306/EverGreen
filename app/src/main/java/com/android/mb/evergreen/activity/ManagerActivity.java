@@ -4,30 +4,26 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.view.View;
-import android.widget.TextView;
 
 import com.android.mb.evergreen.R;
-import com.android.mb.evergreen.utils.NavigationHelper;
-import com.android.mb.evergreen.widget.CleanableEditText;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener{
-
-    private CleanableEditText mEdtLoginName;
+public class ManagerActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_manager);
         initView();
         initOnClickListener();
     }
 
     private void initView(){
-        mEdtLoginName = findViewById(R.id.edt_user_name);
     }
 
     private void initOnClickListener() {
-        findViewById(R.id.btn_login).setOnClickListener(this);
+        findViewById(R.id.btn_new_test).setOnClickListener(this);
+        findViewById(R.id.btn_manager_data).setOnClickListener(this);
+        findViewById(R.id.btn_test_setting).setOnClickListener(this);
         findViewById(R.id.btn_back).setOnClickListener(this);
     }
 
@@ -38,13 +34,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
             case R.id.btn_back:
                 finish();
                 break;
-            case R.id.btn_login:
-//                if (TextUtils.isEmpty(mEdtLoginName.getText().toString())){
-//                    ToastHelper.showLongToast("用户名不能为空");
-//                    return;
-//                }
-                //TODO  账号有无密码
-                NavigationHelper.startActivity(LoginActivity.this,ManagerActivity.class,null,false);
+            case R.id.btn_new_test:
+                break;
+            case R.id.btn_manager_data:
+                break;
+            case R.id.btn_test_setting:
                 break;
             default:
                 break;

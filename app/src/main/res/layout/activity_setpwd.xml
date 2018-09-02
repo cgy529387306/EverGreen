@@ -19,7 +19,7 @@
         android:background="@drawable/background_corners"
         android:orientation="vertical">
 
-        <com.android.mb.evergreen.widget.ClearableEditText
+        <com.android.mb.evergreen.widget.CleanableEditText
             android:id="@+id/edt_user_pwd"
             android:layout_width="match_parent"
             android:layout_height="48dp"

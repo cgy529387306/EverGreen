@@ -10,11 +10,11 @@ import android.widget.TextView;
 import com.android.mb.evergreen.R;
 import com.android.mb.evergreen.utils.NavigationHelper;
 import com.android.mb.evergreen.utils.ToastHelper;
-import com.android.mb.evergreen.widget.ClearableEditText;
+import com.android.mb.evergreen.widget.CleanableEditText;
 
 public class SetPwdActivity extends BaseActivity implements View.OnClickListener{
 
-    private ClearableEditText mEdtPwd;
+    private CleanableEditText mEdtPwd;
     private TextView mBtnLogin;
 
     @Override
