@@ -19,12 +19,12 @@
     <string name="edt_phone">*手机号</string>
     <string name="edt_pwd">密码</string>
     <string name="edt_confirm_pwd">确认密码</string>
-    <string name="edt_surname">姓</string>
-    <string name="edt_name">名</string>
+    <string name="edt_surname">姓名</string>
     <string name="edt_company">机构名</string>
     <string name="tv_tip">*必填</string>
     <string name="has_account">已有账户？点击登录</string>
-    <string name="forget_pwd">忘记密码</string>
+    <string name="has_not_account">还没有账户？点击注册</string>
+    <string name="forget_pwd">忘记密码？</string>
     <string name="phone_tip">手机号不能为空</string>
     <string name="edt_user_name">用户名</string>
     <string name="set_pwd">设置密码</string>
@@ -34,7 +34,12 @@
     <string name="about">关于</string>
     <string name="new_test">新测试</string>
     <string name="manager_data">管理数据</string>
-    <string name="test_setting">检测设置</string>
     <string name="title_evergreen">智能读数仪</string>
     <string name="new_user_register">新用户注册</string>
+    <string name="test_name">测试名称</string>
+    <string name="test_serial">测试批号</string>
+    <string name="test_num">样品编号</string>
+    <string name="test_history">历史数据</string>
+    <string name="test_manager">数据管理</string>
+    <string name="test_setting">检测设置</string>
 </resources>

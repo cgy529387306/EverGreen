@@ -9,8 +9,8 @@ import com.android.mb.evergreen.widget.CleanableEditText;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
-    private CleanableEditText mEdtLoginName;
-
+    private CleanableEditText mEtAccount;
+    private CleanableEditText mEtPwd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,12 +20,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     }
 
     private void initView(){
-        mEdtLoginName = findViewById(R.id.edt_user_name);
+        mEtAccount = findViewById(R.id.et_account);
+        mEtPwd = findViewById(R.id.et_password);
     }
 
     private void initOnClickListener() {
         findViewById(R.id.btn_login).setOnClickListener(this);
         findViewById(R.id.btn_back).setOnClickListener(this);
+        findViewById(R.id.btn_register).setOnClickListener(this);
+        findViewById(R.id.btn_forget_pwd).setOnClickListener(this);
     }
 
     @Override
@@ -41,6 +44,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 //                }
                 //TODO  账号有无密码
                 NavigationHelper.startActivity(LoginActivity.this,ManagerActivity.class,null,false);
+                break;
+            case R.id.btn_register:
+                NavigationHelper.startActivity(LoginActivity.this,RegisterActivity.class,null,true);
+                break;
+            case R.id.btn_forget_pwd:
+                NavigationHelper.startActivity(LoginActivity.this,SetPwdActivity.class,null,true);
                 break;
             default:
                 break;

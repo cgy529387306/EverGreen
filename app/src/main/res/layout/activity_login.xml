@@ -19,36 +19,56 @@
         android:text="@string/user_login"/>
     <LinearLayout
         android:layout_width="200dp"
-        android:layout_height="260dp"
+        android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginTop="40dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/background_corners"
         android:orientation="vertical">
         <com.android.mb.evergreen.widget.CleanableEditText
-            android:id="@+id/edt_user_name"
+            android:id="@+id/et_account"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:lines="1"
             android:imeOptions="actionNext"
             android:hint="@string/edt_user_name"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
             android:textSize="14sp" />
+        <com.android.mb.evergreen.widget.CleanableEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:lines="1"
+            android:imeOptions="actionDone"
+            android:hint="@string/edt_pwd"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="@color/text_black_1"
+            android:text="@string/has_not_account"/>
         <TextView
             android:id="@+id/btn_forget_pwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_gravity="right"
+            android:layout_marginBottom="60dp"
+            android:layout_marginTop="6dp"
             android:textSize="14sp"
+            android:gravity="center"
             android:textColor="@color/text_black_1"
             android:text="@string/forget_pwd"/>
     </LinearLayout>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
     <TextView
         android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:textSize="18sp"
         android:gravity="center"
         android:background="@mipmap/bg_button"
@@ -59,8 +79,9 @@
         android:id="@+id/btn_back"
         android:layout_width="64dp"
         android:layout_height="26dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="30dp"
         android:textColor="@color/text_black_1"
         android:textSize="16sp"
         android:gravity="center"

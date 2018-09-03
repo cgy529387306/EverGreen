@@ -30,45 +30,40 @@
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:imeOptions="actionNext"
+            android:lines="1"
             android:hint="@string/edt_user_name"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
             android:textSize="14sp" />
         <com.android.mb.evergreen.widget.CleanableEditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="42dp"
+            android:lines="1"
             android:imeOptions="actionNext"
-            android:hint="@string/edt_user_name"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:hint="@string/edt_pwd"
             android:textSize="14sp" />
         <com.android.mb.evergreen.widget.CleanableEditText
             android:id="@+id/et_confirm_pwd"
             android:layout_width="match_parent"
             android:layout_height="42dp"
+            android:lines="1"
             android:imeOptions="actionNext"
-            android:hint="@string/edt_user_name"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:hint="@string/edt_confirm_pwd"
             android:textSize="14sp" />
         <com.android.mb.evergreen.widget.CleanableEditText
             android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:imeOptions="actionNext"
-            android:hint="@string/edt_user_name"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:lines="1"
+            android:hint="@string/edt_surname"
             android:textSize="14sp" />
         <com.android.mb.evergreen.widget.CleanableEditText
             android:id="@+id/et_org"
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:imeOptions="actionNext"
-            android:hint="@string/edt_user_name"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:lines="1"
+            android:imeOptions="actionDone"
+            android:hint="@string/edt_company"
             android:textSize="14sp" />
         <TextView
             android:id="@+id/btn_login"
@@ -96,11 +91,14 @@
             android:textColor="@color/text_black_1"
             android:text="@string/tv_tip"/>
     </LinearLayout>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
     <TextView
         android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:textSize="18sp"
         android:gravity="center"
         android:background="@mipmap/bg_button"
@@ -111,8 +109,9 @@
         android:id="@+id/btn_back"
         android:layout_width="64dp"
         android:layout_height="26dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="30dp"
         android:textColor="@color/text_black_1"
         android:textSize="16sp"
         android:gravity="center"

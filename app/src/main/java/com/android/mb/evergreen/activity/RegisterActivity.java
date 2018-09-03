@@ -37,11 +37,15 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         findViewById(R.id.btn_login).setOnClickListener(this);
         findViewById(R.id.btn_forget_pwd).setOnClickListener(this);
         findViewById(R.id.btn_register).setOnClickListener(this);
+        findViewById(R.id.btn_back).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btn_back:
+                finish();
+                break;
             case R.id.btn_login:
                 NavigationHelper.startActivity(RegisterActivity.this,LoginActivity.class,null,true);
                 break;
