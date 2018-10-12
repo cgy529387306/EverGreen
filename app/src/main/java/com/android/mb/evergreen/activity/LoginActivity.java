@@ -3,6 +3,7 @@ package com.android.mb.evergreen.activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.mb.evergreen.R;
 import com.android.mb.evergreen.app.MBApplication;
@@ -19,6 +20,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
     private CleanableEditText mEtAccount;
     private CleanableEditText mEtPwd;
+    private TextView mTvHint;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +32,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private void initView(){
         mEtAccount = findViewById(R.id.et_account);
         mEtPwd = findViewById(R.id.et_password);
+        mTvHint = findViewById(R.id.tv_hint);
     }
 
     private void initOnClickListener() {
@@ -74,14 +77,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         List<User> userList = userDao.queryBuilder().where(UserDao.Properties.Account.eq(account)).list();
         if (userList==null || userList.size()==0){
             ToastHelper.showLongToast("用户名不存在");
+            mTvHint.setVisibility(View.VISIBLE);
+            mTvHint.setText("用户名不存在");
         }else {
             User user = userList.get(0);
             if (pwd.equals(user.getPassword())){
+                mTvHint.setVisibility(View.GONE);
                 ToastHelper.showLongToast("登录成功");
                 MBApplication.mCurrentUser = user;
                 NavigationHelper.startActivity(LoginActivity.this,ManagerActivity.class,null,false);
             }else{
                 ToastHelper.showLongToast("密码不正确");
+                mTvHint.setVisibility(View.VISIBLE);
+                mTvHint.setText("密码不正确");
             }
         }
 
