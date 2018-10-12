@@ -2,12 +2,15 @@ package com.android.mb.evergreen.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.mb.evergreen.R;
+import com.android.mb.evergreen.app.MBApplication;
 import com.android.mb.evergreen.utils.NavigationHelper;
 
 public class ManagerActivity extends BaseActivity implements View.OnClickListener{
 
+    private TextView mTvName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +20,9 @@ public class ManagerActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initView(){
+        String name = MBApplication.mCurrentUser==null||MBApplication.mCurrentUser.getName()==null?"":MBApplication.mCurrentUser.getName();
+        mTvName = findViewById(R.id.tv_name);
+        mTvName.setText("欢迎回来"+name);
     }
 
     private void initOnClickListener() {
