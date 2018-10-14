@@ -26,7 +26,14 @@ public class ExamineDao extends AbstractDao<Examine, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property InsertDate = new Property(2, String.class, "insertDate", false, "INSERT_DATE");
+        public final static Property TestDate = new Property(2, String.class, "testDate", false, "TEST_DATE");
+        public final static Property Serial = new Property(3, String.class, "serial", false, "SERIAL");
+        public final static Property Num = new Property(4, String.class, "num", false, "NUM");
+        public final static Property UserId = new Property(5, Long.class, "userId", false, "USER_ID");
+        public final static Property UserName = new Property(6, String.class, "userName", false, "USER_NAME");
+        public final static Property Result = new Property(7, String.class, "result", false, "RESULT");
+        public final static Property Image = new Property(8, String.class, "image", false, "IMAGE");
+        public final static Property Checked = new Property(9, boolean.class, "checked", false, "CHECKED");
     }
 
 
@@ -44,7 +51,14 @@ public class ExamineDao extends AbstractDao<Examine, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"EXAMINE\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"NAME\" TEXT," + // 1: name
-                "\"INSERT_DATE\" TEXT);"); // 2: insertDate
+                "\"TEST_DATE\" TEXT," + // 2: testDate
+                "\"SERIAL\" TEXT," + // 3: serial
+                "\"NUM\" TEXT," + // 4: num
+                "\"USER_ID\" INTEGER," + // 5: userId
+                "\"USER_NAME\" TEXT," + // 6: userName
+                "\"RESULT\" TEXT," + // 7: result
+                "\"IMAGE\" TEXT," + // 8: image
+                "\"CHECKED\" INTEGER NOT NULL );"); // 9: checked
     }
 
     /** Drops the underlying database table. */
@@ -67,10 +81,41 @@ public class ExamineDao extends AbstractDao<Examine, Long> {
             stmt.bindString(2, name);
         }
  
-        String insertDate = entity.getInsertDate();
-        if (insertDate != null) {
-            stmt.bindString(3, insertDate);
+        String testDate = entity.getTestDate();
+        if (testDate != null) {
+            stmt.bindString(3, testDate);
         }
+ 
+        String serial = entity.getSerial();
+        if (serial != null) {
+            stmt.bindString(4, serial);
+        }
+ 
+        String num = entity.getNum();
+        if (num != null) {
+            stmt.bindString(5, num);
+        }
+ 
+        Long userId = entity.getUserId();
+        if (userId != null) {
+            stmt.bindLong(6, userId);
+        }
+ 
+        String userName = entity.getUserName();
+        if (userName != null) {
+            stmt.bindString(7, userName);
+        }
+ 
+        String result = entity.getResult();
+        if (result != null) {
+            stmt.bindString(8, result);
+        }
+ 
+        String image = entity.getImage();
+        if (image != null) {
+            stmt.bindString(9, image);
+        }
+        stmt.bindLong(10, entity.getChecked() ? 1L: 0L);
     }
 
     @Override
@@ -87,10 +132,41 @@ public class ExamineDao extends AbstractDao<Examine, Long> {
             stmt.bindString(2, name);
         }
  
-        String insertDate = entity.getInsertDate();
-        if (insertDate != null) {
-            stmt.bindString(3, insertDate);
+        String testDate = entity.getTestDate();
+        if (testDate != null) {
+            stmt.bindString(3, testDate);
         }
+ 
+        String serial = entity.getSerial();
+        if (serial != null) {
+            stmt.bindString(4, serial);
+        }
+ 
+        String num = entity.getNum();
+        if (num != null) {
+            stmt.bindString(5, num);
+        }
+ 
+        Long userId = entity.getUserId();
+        if (userId != null) {
+            stmt.bindLong(6, userId);
+        }
+ 
+        String userName = entity.getUserName();
+        if (userName != null) {
+            stmt.bindString(7, userName);
+        }
+ 
+        String result = entity.getResult();
+        if (result != null) {
+            stmt.bindString(8, result);
+        }
+ 
+        String image = entity.getImage();
+        if (image != null) {
+            stmt.bindString(9, image);
+        }
+        stmt.bindLong(10, entity.getChecked() ? 1L: 0L);
     }
 
     @Override
@@ -103,7 +179,14 @@ public class ExamineDao extends AbstractDao<Examine, Long> {
         Examine entity = new Examine( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // insertDate
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // testDate
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // serial
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // num
+            cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5), // userId
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // userName
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // result
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // image
+            cursor.getShort(offset + 9) != 0 // checked
         );
         return entity;
     }
@@ -112,7 +195,14 @@ public class ExamineDao extends AbstractDao<Examine, Long> {
     public void readEntity(Cursor cursor, Examine entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setInsertDate(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setTestDate(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setSerial(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setNum(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setUserId(cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5));
+        entity.setUserName(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setResult(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setImage(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setChecked(cursor.getShort(offset + 9) != 0);
      }
     
     @Override

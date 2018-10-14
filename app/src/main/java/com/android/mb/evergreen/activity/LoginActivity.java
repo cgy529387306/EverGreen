@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.mb.evergreen.R;
-import com.android.mb.evergreen.app.MBApplication;
 import com.android.mb.evergreen.db.GreenDaoManager;
+import com.android.mb.evergreen.entity.CurrentUser;
 import com.android.mb.evergreen.entity.User;
 import com.android.mb.evergreen.greendao.UserDao;
 import com.android.mb.evergreen.utils.NavigationHelper;
@@ -84,8 +84,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
             if (pwd.equals(user.getPassword())){
                 mTvHint.setVisibility(View.GONE);
                 ToastHelper.showLongToast("登录成功");
-                MBApplication.mCurrentUser = user;
-                NavigationHelper.startActivity(LoginActivity.this,ManagerActivity.class,null,false);
+                CurrentUser.getInstance().login(user);
+                NavigationHelper.startActivity(LoginActivity.this,ManagerActivity.class,null,true);
             }else{
                 ToastHelper.showLongToast("密码不正确");
                 mTvHint.setVisibility(View.VISIBLE);

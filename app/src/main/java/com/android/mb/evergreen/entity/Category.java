@@ -12,11 +12,18 @@ public class Category {
 
     private String insertDate;
 
-    @Generated(hash = 1721324)
-    public Category(Long id, String name, String insertDate) {
+    private Long userId;
+
+    private boolean isChecked;
+
+    @Generated(hash = 772723380)
+    public Category(Long id, String name, String insertDate, Long userId,
+            boolean isChecked) {
         this.id = id;
         this.name = name;
         this.insertDate = insertDate;
+        this.userId = userId;
+        this.isChecked = isChecked;
     }
 
     @Generated(hash = 1150634039)
@@ -47,6 +54,27 @@ public class Category {
         this.insertDate = insertDate;
     }
 
+    public Long getUserId() {
+        return this.userId;
+    }
 
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    public boolean getIsChecked() {
+        return this.isChecked;
+    }
+
+    public void setIsChecked(boolean isChecked) {
+        this.isChecked = isChecked;
+    }
 }

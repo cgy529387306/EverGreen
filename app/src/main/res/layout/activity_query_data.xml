@@ -17,22 +17,12 @@
         android:layout_marginTop="50dp"
         android:textColor="@color/text_black_1"
         android:textSize="20sp"
-        android:text="@string/new_test"/>
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/text_black_1"
-        android:textSize="18sp"
-        android:text="欢迎回来xxxxx"
-        />
+        android:text="@string/manager_data"/>
     <TextView
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:textColor="@color/text_black_1"
         android:textSize="16sp"
         android:layout_gravity="center"
@@ -58,7 +48,6 @@
             android:layout_gravity="center_vertical"
             android:src="@mipmap/ic_item_down"/>
     </LinearLayout>
-
     <TextView
         android:layout_width="220dp"
         android:layout_height="wrap_content"
@@ -66,16 +55,28 @@
         android:textColor="@color/text_black_1"
         android:textSize="16sp"
         android:layout_gravity="center"
-        android:text="@string/test_serial"/>
-    <com.android.mb.evergreen.widget.CleanableEditText
-        android:id="@+id/et_test_serial"
+        android:text="查询开始时间"/>
+    <LinearLayout
+        android:id="@+id/btn_start_time"
         android:layout_width="200dp"
         android:layout_height="36dp"
-        android:padding="6dp"
-        android:lines="1"
-        android:imeOptions="actionNext"
+        android:padding="10dp"
+        android:orientation="horizontal"
         android:background="@drawable/border_edit_black"
-        android:textSize="14sp" />
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/tv_start_time"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/text_black_1"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/ic_item_down"/>
+    </LinearLayout>
     <TextView
         android:layout_width="220dp"
         android:layout_height="wrap_content"
@@ -83,27 +84,39 @@
         android:textColor="@color/text_black_1"
         android:textSize="16sp"
         android:layout_gravity="center"
-        android:text="@string/test_num"/>
-    <com.android.mb.evergreen.widget.CleanableEditText
-        android:id="@+id/et_test_num"
+        android:text="查询结束时间"/>
+    <LinearLayout
+        android:id="@+id/btn_end_time"
         android:layout_width="200dp"
         android:layout_height="36dp"
-        android:padding="6dp"
-        android:lines="1"
-        android:imeOptions="actionDone"
+        android:padding="10dp"
+        android:orientation="horizontal"
         android:background="@drawable/border_edit_black"
-        android:textSize="14sp" />
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/tv_end_time"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/text_black_1"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/ic_item_down"/>
+    </LinearLayout>
     <TextView
-        android:id="@+id/btn_test"
+        android:id="@+id/btn_query"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:textColor="@color/text_black_1"
-        android:textSize="16sp"
+        android:layout_marginTop="30dp"
+        android:textSize="18sp"
         android:gravity="center"
-        android:layout_gravity="center"
         android:background="@mipmap/bg_button"
-        android:text="读取结果"/>
+        android:layout_gravity="center"
+        android:textColor="@color/text_black_1"
+        android:text="查询"/>
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -111,8 +124,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:orientation="horizontal"
+        android:visibility="gone"
         android:background="@color/white"
         android:gravity="center_vertical">
         <TextView

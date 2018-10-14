@@ -12,18 +12,15 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.mb.evergreen.R;
 import com.android.mb.evergreen.adapter.MyFragmentPagerAdapter;
 import com.android.mb.evergreen.db.GreenDaoManager;
 import com.android.mb.evergreen.entity.Category;
-import com.android.mb.evergreen.entity.Examine;
+import com.android.mb.evergreen.entity.CurrentUser;
 import com.android.mb.evergreen.fragment.CategoryFragment;
 import com.android.mb.evergreen.fragment.HistoryFragment;
 import com.android.mb.evergreen.fragment.HomeFragment;
@@ -205,7 +202,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
     private void insertData(String name){
-        Category category = new Category(null,name,Helper.date2String(new Date()));
+        Category category = new Category(null,name,Helper.date2String(new Date()), CurrentUser.getInstance().getId(),false);
         GreenDaoManager.getInstance().getNewSession().getCategoryDao().insert(category);
         mCategoryFragment.refreshData();
     }

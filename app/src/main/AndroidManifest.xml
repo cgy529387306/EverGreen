@@ -34,6 +34,18 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.NewTestActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.SettingActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.QueryDataActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ManageTypeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.TestResultActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.QueryResultActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.OutputActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.PhotoPreviewActivity"
             android:screenOrientation="portrait" />

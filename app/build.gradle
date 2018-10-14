@@ -17,7 +17,7 @@ android {
     }
 
     greendao {
-        schemaVersion 2  //版本
+        schemaVersion 4  //版本
         daoPackage 'com.android.mb.evergreen.greendao' // 一般为app包名+生成文件的文件夹名
         targetGenDir 'src/main/java' //生成文件路径
     }
@@ -34,5 +34,6 @@ dependencies {
     implementation 'org.greenrobot:greendao:3.2.2' // add library
     implementation 'org.greenrobot:greendao-generator:3.2.2'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    implementation 'com.contrarywind:Android-PickerView:3.2.6'
     compile project(':multi-image-selector')
 }

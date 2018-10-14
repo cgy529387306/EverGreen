@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import com.android.mb.evergreen.entity.CurrentUser;
 import com.android.mb.evergreen.entity.User;
 import com.android.mb.evergreen.utils.Helper;
 import com.facebook.stetho.Stetho;
@@ -19,8 +20,6 @@ public class MBApplication extends Application {
 	private static final String TAG = MBApplication.class.getSimpleName();
 	
 	private static Context sInstance;
-
-	public static User mCurrentUser;
 
 	/**
 	 * 获取全局Application对象
@@ -49,7 +48,5 @@ public class MBApplication extends Application {
 		sInstance = this;
 		Stetho.initializeWithDefaults(this);
 	}
-
-
 
 }

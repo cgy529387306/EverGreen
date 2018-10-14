@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 import com.android.mb.evergreen.R;
+import com.android.mb.evergreen.entity.CurrentUser;
 
 
 /**
@@ -27,8 +28,14 @@ public class LoadingActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
 
             public void run() {
-                startActivity(new Intent(LoadingActivity.this,HomeActivity.class));
-                finish();
+                if (CurrentUser.getInstance().isLogin()){
+                    startActivity(new Intent(LoadingActivity.this,ManagerActivity.class));
+                    finish();
+                }else{
+                    startActivity(new Intent(LoadingActivity.this,HomeActivity.class));
+                    finish();
+                }
+
             }
 
         }, LOADING_TIME_OUT);

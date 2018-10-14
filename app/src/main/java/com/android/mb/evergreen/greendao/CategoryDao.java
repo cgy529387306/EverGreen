@@ -27,6 +27,8 @@ public class CategoryDao extends AbstractDao<Category, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property InsertDate = new Property(2, String.class, "insertDate", false, "INSERT_DATE");
+        public final static Property UserId = new Property(3, Long.class, "userId", false, "USER_ID");
+        public final static Property IsChecked = new Property(4, boolean.class, "isChecked", false, "IS_CHECKED");
     }
 
 
@@ -44,7 +46,9 @@ public class CategoryDao extends AbstractDao<Category, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"CATEGORY\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"NAME\" TEXT," + // 1: name
-                "\"INSERT_DATE\" TEXT);"); // 2: insertDate
+                "\"INSERT_DATE\" TEXT," + // 2: insertDate
+                "\"USER_ID\" INTEGER," + // 3: userId
+                "\"IS_CHECKED\" INTEGER NOT NULL );"); // 4: isChecked
     }
 
     /** Drops the underlying database table. */
@@ -71,6 +75,12 @@ public class CategoryDao extends AbstractDao<Category, Long> {
         if (insertDate != null) {
             stmt.bindString(3, insertDate);
         }
+ 
+        Long userId = entity.getUserId();
+        if (userId != null) {
+            stmt.bindLong(4, userId);
+        }
+        stmt.bindLong(5, entity.getIsChecked() ? 1L: 0L);
     }
 
     @Override
@@ -91,6 +101,12 @@ public class CategoryDao extends AbstractDao<Category, Long> {
         if (insertDate != null) {
             stmt.bindString(3, insertDate);
         }
+ 
+        Long userId = entity.getUserId();
+        if (userId != null) {
+            stmt.bindLong(4, userId);
+        }
+        stmt.bindLong(5, entity.getIsChecked() ? 1L: 0L);
     }
 
     @Override
@@ -103,7 +119,9 @@ public class CategoryDao extends AbstractDao<Category, Long> {
         Category entity = new Category( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // insertDate
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // insertDate
+            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // userId
+            cursor.getShort(offset + 4) != 0 // isChecked
         );
         return entity;
     }
@@ -113,6 +131,8 @@ public class CategoryDao extends AbstractDao<Category, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setInsertDate(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setUserId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
+        entity.setIsChecked(cursor.getShort(offset + 4) != 0);
      }
     
     @Override

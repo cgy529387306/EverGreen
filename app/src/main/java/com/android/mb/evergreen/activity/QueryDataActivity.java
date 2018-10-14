@@ -9,47 +9,42 @@ import android.widget.TextView;
 import com.android.mb.evergreen.R;
 import com.android.mb.evergreen.db.GreenDaoManager;
 import com.android.mb.evergreen.entity.Category;
-import com.android.mb.evergreen.entity.CurrentUser;
-import com.android.mb.evergreen.entity.Examine;
-import com.android.mb.evergreen.greendao.ExamineDao;
 import com.android.mb.evergreen.utils.Helper;
 import com.android.mb.evergreen.utils.NavigationHelper;
 import com.android.mb.evergreen.utils.ToastHelper;
-import com.android.mb.evergreen.widget.CleanableEditText;
+import com.bigkoo.pickerview.TimePickerView;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class NewTestActivity extends BaseActivity implements View.OnClickListener{
+public class QueryDataActivity extends BaseActivity implements View.OnClickListener{
     private TextView mTvTestName;
-    private CleanableEditText mEtSerial;
-    private CleanableEditText mEtNum;
-    private TextView mTvName;
+    private TextView mTvStartTime;
+    private TextView mTvEndTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_test);
+        setContentView(R.layout.activity_query_data);
         initView();
         initOnClickListener();
     }
 
     private void initView(){
-        String name = CurrentUser.getInstance().getName();
-        mTvName = findViewById(R.id.tv_name);
-        mTvName.setText("欢迎回来"+name);
         mTvTestName = findViewById(R.id.tv_test_name);
-        mEtSerial = findViewById(R.id.et_test_serial);
-        mEtNum = findViewById(R.id.et_test_num);
+        mTvStartTime = findViewById(R.id.tv_start_time);
+        mTvEndTime = findViewById(R.id.tv_end_time);
     }
 
     private void initOnClickListener() {
         findViewById(R.id.btn_test_name).setOnClickListener(this);
+        findViewById(R.id.btn_start_time).setOnClickListener(this);
+        findViewById(R.id.btn_end_time).setOnClickListener(this);
         findViewById(R.id.btn_history).setOnClickListener(this);
         findViewById(R.id.btn_manager).setOnClickListener(this);
         findViewById(R.id.btn_setting).setOnClickListener(this);
-        findViewById(R.id.btn_test).setOnClickListener(this);
         findViewById(R.id.btn_exit).setOnClickListener(this);
+        findViewById(R.id.btn_query).setOnClickListener(this);
     }
 
     @Override
@@ -58,21 +53,58 @@ public class NewTestActivity extends BaseActivity implements View.OnClickListene
             case R.id.btn_test_name:
                 showTypeList();
                 break;
+            case R.id.btn_start_time:
+                showStartTimePicker();
+                break;
+            case R.id.btn_end_time:
+                showEndTimePicker();
+                break;
             case R.id.btn_history:
                 break;
             case R.id.btn_manager:
                 break;
-            case R.id.btn_test:
-                doTest();
-                break;
             case R.id.btn_setting:
                 break;
             case R.id.btn_exit:
-                finish();
+                break;
+            case R.id.btn_query:
+                doQuery();
                 break;
             default:
                 break;
         }
+    }
+
+    private void showStartTimePicker(){
+        TimePickerView pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {
+                mTvStartTime.setText(Helper.date2String(date,"yyyy-MM-dd"));
+            }
+        })
+                .setType(new boolean[]{true, true, true, false, false, false})// 默认全部显示
+                .setCancelText("取消")//取消按钮文字
+                .setSubmitText("确定")//确认按钮文字
+                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+                .build();
+
+        pvTime.show();
+    }
+
+    private void showEndTimePicker(){
+        TimePickerView pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {
+                mTvEndTime.setText(Helper.date2String(date,"yyyy-MM-dd"));
+            }
+        })
+                .setType(new boolean[]{true, true, true, false, false, false})// 默认全部显示
+                .setCancelText("取消")//取消按钮文字
+                .setSubmitText("确定")//确认按钮文字
+                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+                .build();
+
+        pvTime.show();
     }
 
     /**
@@ -82,7 +114,7 @@ public class NewTestActivity extends BaseActivity implements View.OnClickListene
         final List<Category> dataList = GreenDaoManager.getInstance().getNewSession().getCategoryDao().queryBuilder().build().list();
         if (Helper.isEmpty(dataList)){
             ToastHelper.showLongToast("暂无检测类型，请先添加检测类型");
-            NavigationHelper.startActivity(NewTestActivity.this,ManageTypeActivity.class,null,false);
+            NavigationHelper.startActivity(QueryDataActivity.this,ManageTypeActivity.class,null,false);
         }else{
             List<String> titleList = new ArrayList<>();
             for (Category category:dataList){
@@ -113,27 +145,27 @@ public class NewTestActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-    private void doTest(){
+    private void doQuery(){
         String testName = mTvTestName.getText().toString().trim();
-        String testSerial = mEtSerial.getText().toString().trim();
-        String testNum = mEtNum.getText().toString().trim();
+        String startTime = mTvStartTime.getText().toString().trim();
+        String endTime = mTvEndTime.getText().toString().trim();
         if (Helper.isEmpty(testName)){
             ToastHelper.showLongToast("请选择检测类型");
             return;
         }
-        if (Helper.isEmpty(testSerial)){
-            ToastHelper.showLongToast("请输入测试批号");
+        if (Helper.isEmpty(startTime)){
+            ToastHelper.showLongToast("请选择开始时间");
             return;
         }
-        if (Helper.isEmpty(testNum)){
-            ToastHelper.showLongToast("请输入样品编号");
+        if (Helper.isEmpty(endTime)){
+            ToastHelper.showLongToast("请选择结束时间");
             return;
         }
-        ExamineDao examineDao = GreenDaoManager.getInstance().getNewSession().getExamineDao();
-        Examine examine = new Examine(null,testName,Helper.date2String(new Date()),testSerial,testNum,CurrentUser.getInstance().getId(),CurrentUser.getInstance().getName(),"阳性","test",false);
-        long id = examineDao.insert(examine);
         Bundle bundle = new Bundle();
-        bundle.putLong("id",id);
-        NavigationHelper.startActivity(NewTestActivity.this,TestResultActivity.class,bundle,false);
+        bundle.putString("testName",testName);
+        bundle.putString("startTime",startTime);
+        bundle.putString("endTime",endTime);
+        NavigationHelper.startActivity(QueryDataActivity.this,QueryResultActivity.class,bundle,false);
     }
+
 }
