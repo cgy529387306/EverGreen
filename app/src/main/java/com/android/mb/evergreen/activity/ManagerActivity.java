@@ -68,7 +68,7 @@ public class ManagerActivity extends BaseActivity implements View.OnClickListene
 
     private void insertTestData(){
         CategoryDao categoryDao = GreenDaoManager.getInstance().getNewSession().getCategoryDao();
-        List<Category> categoryList = categoryDao.queryBuilder().list();
+        List<Category> categoryList = categoryDao.loadAll();
         if (Helper.isEmpty(categoryList)){
             Category category1 = new Category(null,"检测类型1",Helper.date2String(new Date()), CurrentUser.getInstance().getId(),false);
             categoryDao.insert(category1);

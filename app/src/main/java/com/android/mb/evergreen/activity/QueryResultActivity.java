@@ -10,6 +10,7 @@ import android.view.View;
 import com.android.mb.evergreen.R;
 import com.android.mb.evergreen.adapter.ExamineAdapter;
 import com.android.mb.evergreen.db.GreenDaoManager;
+import com.android.mb.evergreen.entity.CurrentUser;
 import com.android.mb.evergreen.entity.Examine;
 import com.android.mb.evergreen.greendao.ExamineDao;
 import com.android.mb.evergreen.utils.Helper;
@@ -72,7 +73,12 @@ public class QueryResultActivity extends BaseActivity implements View.OnClickLis
         testName = getIntent().getStringExtra("testName");
         startTime = getIntent().getStringExtra("startTime");
         endTime = getIntent().getStringExtra("endTime");
-        List<Examine> dataList = GreenDaoManager.getInstance().getNewSession().getExamineDao().queryBuilder().where(ExamineDao.Properties.Name.eq(testName)).build().list();
+        List<Examine> dataList = new ArrayList<>();
+        if (CurrentUser.getInstance().isAdmin()){
+            dataList = GreenDaoManager.getInstance().getNewSession().getExamineDao().queryBuilder().where(ExamineDao.Properties.Name.eq(testName)).build().list();
+        }else{
+            dataList = GreenDaoManager.getInstance().getNewSession().getExamineDao().queryBuilder().where(ExamineDao.Properties.UserId.eq(CurrentUser.getInstance().getId())).where(ExamineDao.Properties.Name.eq(testName)).build().list();
+        }
         mAdapter.setNewData(dataList);
     }
 
