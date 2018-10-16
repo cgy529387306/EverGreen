@@ -19,13 +19,16 @@ public class User {
     private String password;
     private String org;
     private String name;
-    @Generated(hash = 1816823752)
-    public User(Long id, String account, String password, String org, String name) {
+    private boolean isAdmin;
+    @Generated(hash = 1997057306)
+    public User(Long id, String account, String password, String org, String name,
+            boolean isAdmin) {
         this.id = id;
         this.account = account;
         this.password = password;
         this.org = org;
         this.name = name;
+        this.isAdmin = isAdmin;
     }
     @Generated(hash = 586692638)
     public User() {
@@ -59,6 +62,12 @@ public class User {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public boolean getIsAdmin() {
+        return this.isAdmin;
+    }
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
 

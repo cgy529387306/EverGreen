@@ -15,6 +15,7 @@ public class CurrentUser {
     private String name;
     private String org;
     private Long id;
+    private boolean isAdmin;
 
 
     public String getAccount() {
@@ -49,7 +50,13 @@ public class CurrentUser {
         this.id = id;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
 
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 
     //region 单例
     private static final String TAG = CurrentUser.class.getSimpleName();
@@ -85,6 +92,7 @@ public class CurrentUser {
             me.setAccount(entity.getAccount());
             me.setName(entity.getName());
             me.setOrg(entity.getOrg());
+            me.setAdmin(entity.getIsAdmin());
             json = JsonHelper.toJson(me);
             born = me != null;
         }

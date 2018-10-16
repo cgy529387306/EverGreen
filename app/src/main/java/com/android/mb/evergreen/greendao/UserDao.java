@@ -29,6 +29,7 @@ public class UserDao extends AbstractDao<User, Long> {
         public final static Property Password = new Property(2, String.class, "password", false, "PASSWORD");
         public final static Property Org = new Property(3, String.class, "org", false, "ORG");
         public final static Property Name = new Property(4, String.class, "name", false, "NAME");
+        public final static Property IsAdmin = new Property(5, boolean.class, "isAdmin", false, "IS_ADMIN");
     }
 
 
@@ -48,7 +49,8 @@ public class UserDao extends AbstractDao<User, Long> {
                 "\"ACCOUNT\" TEXT," + // 1: account
                 "\"PASSWORD\" TEXT," + // 2: password
                 "\"ORG\" TEXT," + // 3: org
-                "\"NAME\" TEXT);"); // 4: name
+                "\"NAME\" TEXT," + // 4: name
+                "\"IS_ADMIN\" INTEGER NOT NULL );"); // 5: isAdmin
     }
 
     /** Drops the underlying database table. */
@@ -85,6 +87,7 @@ public class UserDao extends AbstractDao<User, Long> {
         if (name != null) {
             stmt.bindString(5, name);
         }
+        stmt.bindLong(6, entity.getIsAdmin() ? 1L: 0L);
     }
 
     @Override
@@ -115,6 +118,7 @@ public class UserDao extends AbstractDao<User, Long> {
         if (name != null) {
             stmt.bindString(5, name);
         }
+        stmt.bindLong(6, entity.getIsAdmin() ? 1L: 0L);
     }
 
     @Override
@@ -129,7 +133,8 @@ public class UserDao extends AbstractDao<User, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // account
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // password
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // org
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // name
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // name
+            cursor.getShort(offset + 5) != 0 // isAdmin
         );
         return entity;
     }
@@ -141,6 +146,7 @@ public class UserDao extends AbstractDao<User, Long> {
         entity.setPassword(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setOrg(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setIsAdmin(cursor.getShort(offset + 5) != 0);
      }
     
     @Override

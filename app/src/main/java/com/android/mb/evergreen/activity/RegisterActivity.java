@@ -100,7 +100,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         List<User> userList = userDao.queryBuilder().where(UserDao.Properties.Account.eq(account)).list();
         if (userList==null || userList.size()==0){
-            userDao.insert(new User(null,account,pwd,name,org));
+            userDao.insert(new User(null,account,pwd,org,name,false));
             ToastHelper.showLongToast("注册成功");
             NavigationHelper.startActivity(RegisterActivity.this,LoginActivity.class,null,true);
         }else {

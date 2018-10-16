@@ -8,7 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 import com.android.mb.evergreen.R;
+import com.android.mb.evergreen.db.GreenDaoManager;
+import com.android.mb.evergreen.entity.Category;
 import com.android.mb.evergreen.entity.CurrentUser;
+import com.android.mb.evergreen.entity.User;
+import com.android.mb.evergreen.greendao.CategoryDao;
+import com.android.mb.evergreen.greendao.UserDao;
+import com.android.mb.evergreen.utils.Helper;
+import com.android.mb.evergreen.utils.PreferencesHelper;
+
+import java.util.Date;
 
 
 /**
@@ -25,6 +34,7 @@ public class LoadingActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
+        insertTestData();
         new Handler().postDelayed(new Runnable() {
 
             public void run() {
@@ -39,6 +49,17 @@ public class LoadingActivity extends AppCompatActivity {
             }
 
         }, LOADING_TIME_OUT);
+    }
+
+    private void insertTestData(){
+        boolean isFirstIn = PreferencesHelper.getInstance().getBoolean("isFirstIn",true);
+        if (isFirstIn){
+            PreferencesHelper.getInstance().putBoolean("isFirstIn",false);
+            UserDao userDao = GreenDaoManager.getInstance().getNewSession().getUserDao();
+            userDao.insert(new User(null,"admin1","111111","系统管理","管理员1",true));
+            userDao.insert(new User(null,"admin2","222222","系统管理","管理员2",true));
+            userDao.insert(new User(null,"admin3","333333","系统管理","管理员3",true));
+        }
     }
 
 
