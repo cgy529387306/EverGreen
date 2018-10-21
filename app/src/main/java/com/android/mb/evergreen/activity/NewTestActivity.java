@@ -10,15 +10,12 @@ import com.android.mb.evergreen.R;
 import com.android.mb.evergreen.db.GreenDaoManager;
 import com.android.mb.evergreen.entity.Category;
 import com.android.mb.evergreen.entity.CurrentUser;
-import com.android.mb.evergreen.entity.Examine;
-import com.android.mb.evergreen.greendao.ExamineDao;
 import com.android.mb.evergreen.utils.Helper;
 import com.android.mb.evergreen.utils.NavigationHelper;
 import com.android.mb.evergreen.utils.ToastHelper;
 import com.android.mb.evergreen.widget.CleanableEditText;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class NewTestActivity extends BaseActivity implements View.OnClickListener{
@@ -129,11 +126,13 @@ public class NewTestActivity extends BaseActivity implements View.OnClickListene
             ToastHelper.showLongToast("请输入样品编号");
             return;
         }
-        ExamineDao examineDao = GreenDaoManager.getInstance().getNewSession().getExamineDao();
-        Examine examine = new Examine(null,testName,Helper.date2String(new Date()),testSerial,testNum,CurrentUser.getInstance().getId(),CurrentUser.getInstance().getName(),"阳性","test",false);
-        long id = examineDao.insert(examine);
-        Bundle bundle = new Bundle();
-        bundle.putLong("id",id);
-        NavigationHelper.startActivity(NewTestActivity.this,TestResultActivity.class,bundle,false);
+        NavigationHelper.startActivity(NewTestActivity.this,TestImageActivity.class,null,false);
+
+//        ExamineDao examineDao = GreenDaoManager.getInstance().getNewSession().getExamineDao();
+//        Examine examine = new Examine(null,testName,Helper.date2String(new Date()),testSerial,testNum,CurrentUser.getInstance().getId(),CurrentUser.getInstance().getName(),"阳性","test",false);
+//        long id = examineDao.insert(examine);
+//        Bundle bundle = new Bundle();
+//        bundle.putLong("id",id);
+//        NavigationHelper.startActivity(NewTestActivity.this,TestResultActivity.class,bundle,false);
     }
 }

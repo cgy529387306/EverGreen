@@ -49,6 +49,9 @@
         <activity
             android:name=".activity.PhotoPreviewActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.TestImageActivity"
+            android:screenOrientation="portrait" />
         <!--图片多选页面-->
         <activity
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
