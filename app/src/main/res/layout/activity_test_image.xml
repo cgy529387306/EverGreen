@@ -10,13 +10,20 @@
         android:layout_height="wrap_content"
         android:src="@mipmap/bg_tm_top"
         android:layout_marginTop="20dp"/>
-    <com.android.mb.evergreen.widget.ShaderView
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="说明：第一步点击选择C区，第二步点击选择T区"/>
+    <com.android.mb.evergreen.widget.ZoomImageView
+        android:id="@+id/zoomImage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        android:src="@mipmap/bg_home_top"/>
+        android:layout_marginBottom="15dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

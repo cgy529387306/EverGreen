@@ -16,12 +16,15 @@ import com.android.mb.evergreen.utils.Helper;
 import com.android.mb.evergreen.utils.NavigationHelper;
 import com.android.mb.evergreen.utils.ToastHelper;
 import com.android.mb.evergreen.widget.CleanableEditText;
+import com.android.mb.evergreen.widget.ZoomImageView;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class TestImageActivity extends BaseActivity implements View.OnClickListener{
+
+    private ZoomImageView mZoomImageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,8 @@ public class TestImageActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void initView(){
+        mZoomImageView = findViewById(R.id.zoomImage);
+        mZoomImageView.setImageResource(R.mipmap.bg_home_top);
     }
 
     private void initOnClickListener() {
