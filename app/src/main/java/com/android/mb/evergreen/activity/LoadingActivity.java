@@ -34,7 +34,7 @@ public class LoadingActivity extends AppCompatActivity {
 
             public void run() {
                 if (CurrentUser.getInstance().isLogin()){
-                    startActivity(new Intent(LoadingActivity.this,TestImageActivity.class));
+                    startActivity(new Intent(LoadingActivity.this,ManagerActivity.class));
                     finish();
                 }else{
                     startActivity(new Intent(LoadingActivity.this,HomeActivity.class));
@@ -56,6 +56,7 @@ public class LoadingActivity extends AppCompatActivity {
             userDao.insert(new User(null,"admin3","333333","系统管理","管理员3",true));
         }
     }
+
 
 
 }

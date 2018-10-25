@@ -30,14 +30,14 @@
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:imeOptions="actionNext"
-            android:lines="1"
+            android:singleLine="true"
             android:hint="@string/edt_user_name"
             android:textSize="14sp" />
         <com.android.mb.evergreen.widget.CleanableEditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:lines="1"
+            android:singleLine="true"
             android:imeOptions="actionNext"
             android:hint="@string/edt_pwd"
             android:textSize="14sp" />
@@ -54,14 +54,14 @@
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:imeOptions="actionNext"
-            android:lines="1"
+            android:singleLine="true"
             android:hint="@string/edt_surname"
             android:textSize="14sp" />
         <com.android.mb.evergreen.widget.CleanableEditText
             android:id="@+id/et_org"
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:lines="1"
+            android:singleLine="true"
             android:imeOptions="actionDone"
             android:hint="@string/edt_company"
             android:textSize="14sp" />

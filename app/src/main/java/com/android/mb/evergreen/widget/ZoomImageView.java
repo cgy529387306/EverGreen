@@ -26,7 +26,7 @@ import java.util.List;
  * @author Gloomy
  * @date 2016年07月02日15:12:20
  */
-public class ZoomImageView extends ImageView implements ViewTreeObserver.OnGlobalLayoutListener
+public class ZoomImageView extends android.support.v7.widget.AppCompatImageView implements ViewTreeObserver.OnGlobalLayoutListener
         , View.OnTouchListener, ScaleGestureDetector.OnScaleGestureListener {
 
     private static final String TAG = "ZoomImageView";
@@ -75,8 +75,8 @@ public class ZoomImageView extends ImageView implements ViewTreeObserver.OnGloba
     private boolean isScaleing;
     private List<MotionEvent> events;
     private OnClickListener onClickListener;
+    private OnMyClickListener mOnMyClickListener;
     private int arae_img_id = -1;
-
 
     public ZoomImageView(Context context) {
         this(context, null);
@@ -112,8 +112,8 @@ public class ZoomImageView extends ImageView implements ViewTreeObserver.OnGloba
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                if (onClickListener != null) {
-                    onClickListener.onClick(ZoomImageView.this);
+                if (mOnMyClickListener != null) {
+                    mOnMyClickListener.onMyClick(e);
                     return true;
                 }
                 return false;
@@ -339,7 +339,6 @@ public class ZoomImageView extends ImageView implements ViewTreeObserver.OnGloba
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
-
                 float dx = x - mLastX;
                 float dy = y - mLastY;
 
@@ -385,7 +384,6 @@ public class ZoomImageView extends ImageView implements ViewTreeObserver.OnGloba
             }
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP: {
-                mLastPointereCount = 0;
                 break;
             }
         }
@@ -573,6 +571,23 @@ public class ZoomImageView extends ImageView implements ViewTreeObserver.OnGloba
         setScaleType(ScaleType.CENTER);
         setImageResource(resID);
     }
+
+    /**
+     * Interface definition for a callback to be invoked when a view is clicked.
+     */
+    public interface OnMyClickListener {
+        /**
+         * Called when a view has been clicked.
+         *
+         * @param event The view that was clicked.
+         */
+        void onMyClick(MotionEvent event);
+    }
+
+    public void setOnMyClickListener(OnMyClickListener l) {
+        this.mOnMyClickListener = l;
+    }
+
 
 }
 

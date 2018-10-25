@@ -1,6 +1,5 @@
 package com.android.mb.evergreen.activity;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -9,7 +8,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -27,14 +25,12 @@ import com.android.mb.evergreen.fragment.HomeFragment;
 import com.android.mb.evergreen.utils.Helper;
 import com.android.mb.evergreen.utils.ToastHelper;
 import com.android.mb.evergreen.widget.FragmentViewPager;
-import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
-import rx.functions.Action1;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
@@ -161,18 +157,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 break;
             case R.id.iv_action:
                 if (mFragmentViewPager.getCurrentItem()==0){
-                    RxPermissions.getInstance(MainActivity.this)
-                            .request(Manifest.permission.READ_EXTERNAL_STORAGE)//多个权限用","隔开
-                            .subscribe(new Action1<Boolean>() {
-                                @Override
-                                public void call(Boolean aBoolean) {
-                                    if (aBoolean) {
-                                        selectImage();
-                                    } else {
-                                        Log.i("permissions", "btn_more_sametime：" + aBoolean);
-                                    }
-                                }
-                            });
+
                 }else if (mFragmentViewPager.getCurrentItem()==1){
                     showAlert();
                 }

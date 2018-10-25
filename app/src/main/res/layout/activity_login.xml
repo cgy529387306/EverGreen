@@ -29,7 +29,7 @@
             android:id="@+id/et_account"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:lines="1"
+            android:singleLine="true"
             android:imeOptions="actionNext"
             android:hint="@string/edt_user_name"
             android:textSize="14sp" />
@@ -37,7 +37,7 @@
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:lines="1"
+            android:singleLine="true"
             android:imeOptions="actionDone"
             android:hint="@string/edt_pwd"
             android:textSize="14sp" />
