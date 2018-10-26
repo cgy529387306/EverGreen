@@ -16,6 +16,7 @@ import com.android.mb.evergreen.greendao.ExamineDao;
 import com.android.mb.evergreen.utils.Helper;
 import com.android.mb.evergreen.utils.NavigationHelper;
 import com.android.mb.evergreen.utils.ToastHelper;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,15 @@ public class QueryResultActivity extends BaseActivity implements View.OnClickLis
         findViewById(R.id.btn_delete).setOnClickListener(this);
         findViewById(R.id.btn_add).setOnClickListener(this);
         findViewById(R.id.btn_back).setOnClickListener(this);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Examine examine = mAdapter.getItem(position);
+                Bundle bundle = new Bundle();
+                bundle.putLong("id",examine.getId());
+                NavigationHelper.startActivity(QueryResultActivity.this,TestResultActivity.class,bundle,false);
+            }
+        });
     }
 
     @Override

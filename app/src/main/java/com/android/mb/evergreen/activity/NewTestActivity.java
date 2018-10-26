@@ -179,15 +179,6 @@ public class NewTestActivity extends BaseActivity implements View.OnClickListene
         bundle.putString("testNum",testNum);
         bundle.putString("imagePath",selectImages.get(0));
         NavigationHelper.startActivity(NewTestActivity.this,TestImageActivity.class,bundle,false);
-
-//        ExamineDao examineDao = GreenDaoManager.getInstance().getNewSession().getExamineDao();
-//        Examine examine = new Examine(null,testName,Helper.date2String(new Date()),testSerial,testNum,CurrentUser.getInstance().getId(),CurrentUser.getInstance().getName(),"阳性","test",false);
-//        long id = examineDao.insert(examine);
-//        Bundle bundle = new Bundle();
-//        bundle.putLong("id",id);
-//        NavigationHelper.startActivity(NewTestActivity.this,TestResultActivity.class,bundle,false);
-
-//        PhotoPreviewActivity.preview(this, selectImages.get(0));
     }
 
     @Override

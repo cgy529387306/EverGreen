@@ -1,15 +1,19 @@
 package com.android.mb.evergreen.activity;
 
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.mb.evergreen.R;
 import com.android.mb.evergreen.db.GreenDaoManager;
 import com.android.mb.evergreen.entity.Examine;
 import com.android.mb.evergreen.greendao.ExamineDao;
+import com.android.mb.evergreen.utils.Helper;
 import com.android.mb.evergreen.utils.NavigationHelper;
 
 public class TestResultActivity extends BaseActivity implements View.OnClickListener{
@@ -21,6 +25,7 @@ public class TestResultActivity extends BaseActivity implements View.OnClickList
     private TextView mTvNo;
     private TextView mTvSerial;
     private TextView mTvResult;
+    private ImageView mImageView;
     private long id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,7 @@ public class TestResultActivity extends BaseActivity implements View.OnClickList
         mTvNo = findViewById(R.id.tv_no);
         mTvSerial = findViewById(R.id.tv_serial);
         mTvResult = findViewById(R.id.tv_result);
+        mImageView = findViewById(R.id.iv_test_image);
     }
 
     private void initOnClickListener() {
@@ -52,6 +58,13 @@ public class TestResultActivity extends BaseActivity implements View.OnClickList
         ExamineDao examineDao = GreenDaoManager.getInstance().getNewSession().getExamineDao();
         Examine examine = examineDao.loadByRowId(id);
         if (examine!=null){
+            String imagePath = examine.getImage();
+            if (Helper.isNotEmpty(imagePath)){
+                Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+                if (bitmap!=null){
+                    mImageView.setImageBitmap(bitmap);
+                }
+            }
             mTvTime.setText("测试时间："+examine.getTestDate());
             mTvName.setText("测试名称："+examine.getName());
             mTvNum.setText("测试编号："+examine.getNum());

@@ -16,14 +16,19 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:padding="10dp"
-        android:text="说明：放大图片到最大，点击选择检测线"/>
-    <ImageView
-        android:id="@+id/zoomImage"
+        android:text="说明：点击选择质控线(C) 和 检测线(T)"/>
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp" />
+        android:layout_weight="1">
+        <ImageView
+            android:id="@+id/zoomImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp" />
+    </FrameLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,22 +38,34 @@
         android:orientation="horizontal">
         <TextView
             android:id="@+id/tv_c"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_black_1"
             android:textSize="16sp"
             android:layout_gravity="center"
-            android:text="C:请选择C区"/>
+            android:text="C:"/>
+        <ImageView
+            android:id="@+id/iv_c"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/transparent" />
+
         <TextView
             android:id="@+id/tv_t"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
             android:textColor="@color/text_black_1"
             android:textSize="16sp"
             android:layout_gravity="center"
-            android:text="T:请选择T区"/>
+            android:text="T:"/>
+        <ImageView
+            android:id="@+id/iv_t"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/transparent" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
