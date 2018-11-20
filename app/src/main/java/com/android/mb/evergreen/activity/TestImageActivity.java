@@ -133,10 +133,10 @@ public class TestImageActivity extends BaseActivity implements View.OnClickListe
         String message = "r=" + r + ",g=" + g + ",b=" + b;
         Log.i("cgy", message);
         if (mTestStep==0){
-            mCRGB = Color.rgb(r, g, b);
+            mCRGB = (int)(0.299*r+ 0.587*g+0.114*b);
             mIvC.setBackgroundColor(color);
         }else{
-            mTRGB = Color.rgb(r, g, b);
+            mTRGB = (int)(0.299*r+ 0.587*g+0.114*b);
             mIvT.setBackgroundColor(color);
         }
     }
