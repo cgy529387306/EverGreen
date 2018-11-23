@@ -21,6 +21,7 @@ import com.android.mb.evergreen.greendao.ExamineDao;
 import com.android.mb.evergreen.utils.DialogHelper;
 import com.android.mb.evergreen.utils.Helper;
 import com.android.mb.evergreen.utils.NavigationHelper;
+import com.android.mb.evergreen.utils.ProjectHelper;
 import com.android.mb.evergreen.utils.ToastHelper;
 import com.android.mb.evergreen.widget.ZoomImageView;
 
@@ -33,6 +34,7 @@ public class TestImageActivity extends BaseActivity implements View.OnClickListe
     private ImageView mZoomImageView;
     private int mTestStep = 0;
     private TextView mTvC,mTvT;
+    private TextView mResult;
     private ImageView mIvC,mIvT;
     private String mTestName;
     private String mTestSerial;
@@ -59,6 +61,7 @@ public class TestImageActivity extends BaseActivity implements View.OnClickListe
         mTvT = findViewById(R.id.tv_t);
         mIvC = findViewById(R.id.iv_c);
         mIvT = findViewById(R.id.iv_t);
+        mResult = findViewById(R.id.tv_result);
         mZoomImageView = findViewById(R.id.zoomImage);
         mBitmap = BitmapFactory.decodeFile(mImagePath);
         if (mBitmap==null){
@@ -126,17 +129,11 @@ public class TestImageActivity extends BaseActivity implements View.OnClickListe
     private void setImageColor(int x,int y){
         int color = getColor(mZoomImageView,x,y);
         // 如果你想做的更细致的话 可以把颜色值的R G B 拿到做响应的处理
-        int r = Color.red(color);
-        int g = Color.green(color);
-        int b = Color.blue(color);
-        int a = Color.alpha(color);
-        String message = "r=" + r + ",g=" + g + ",b=" + b;
-        Log.i("cgy", message);
         if (mTestStep==0){
-            mCRGB = (int)(0.299*r+ 0.587*g+0.114*b);
+            mCRGB = color;
             mIvC.setBackgroundColor(color);
         }else{
-            mTRGB = (int)(0.299*r+ 0.587*g+0.114*b);
+            mTRGB =color;
             mIvT.setBackgroundColor(color);
         }
     }
@@ -159,24 +156,23 @@ public class TestImageActivity extends BaseActivity implements View.OnClickListe
             return;
         }
 
-        String result="";
-        if (mCRGB<50){
-            result = "Invalid";
-        }else if (mTRGB<100){
-            result = "Positive:0.6ppb";
-        }else if (mTRGB<200){
-            result = "Positive:0.3ppb";
-        }else if (mTRGB<=255){
-            result = "Positive:0.1ppb";
-        }else if (mTRGB>255){
-            result = "Negative";
-        }
+        int cr = Color.red(mCRGB);
+        int cg = Color.green(mCRGB);
+        int cb = Color.blue(mCRGB);
+
+        int tr = Color.red(mTRGB);
+        int tg = Color.green(mTRGB);
+        int tb = Color.blue(mTRGB);
+
+        String result = "CRGB:"+ ProjectHelper.toHex(cr,cg,cb)+"  CR:"+cr+"  CG:"+cg+"  CB:"+cb
+                +"\nTRGB:"+ProjectHelper.toHex(tr,tg,tb)+"  TR:"+tr+"  TG:"+tg+"  TB:"+tb;
+        mResult.setText(result);
         ExamineDao examineDao = GreenDaoManager.getInstance().getNewSession().getExamineDao();
         Examine examine = new Examine(null,mTestName, Helper.date2String(new Date()),mTestSerial,mTestNum, CurrentUser.getInstance().getId(),CurrentUser.getInstance().getName(),result,mImagePath,false);
         long id = examineDao.insert(examine);
-        Bundle bundle = new Bundle();
-        bundle.putLong("id",id);
-        NavigationHelper.startActivity(TestImageActivity.this,TestResultActivity.class,bundle,false);
+//        Bundle bundle = new Bundle();
+//        bundle.putLong("id",id);
+//        NavigationHelper.startActivity(TestImageActivity.this,TestResultActivity.class,bundle,false);
     }
 
 }
