@@ -2,13 +2,7 @@ package com.android.mb.evergreen.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
@@ -30,8 +24,6 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 public class NewTestActivity extends BaseActivity implements View.OnClickListener{
     private TextView mTvTestName;
