@@ -14,15 +14,21 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.mb.evergreen.R;
+import com.android.mb.evergreen.camera.CameraColorPickerPreview;
 import com.android.mb.evergreen.db.GreenDaoManager;
 import com.android.mb.evergreen.entity.Category;
 import com.android.mb.evergreen.entity.CurrentUser;
+import com.android.mb.evergreen.entity.Examine;
+import com.android.mb.evergreen.greendao.ExamineDao;
 import com.android.mb.evergreen.utils.Helper;
 import com.android.mb.evergreen.utils.NavigationHelper;
 import com.android.mb.evergreen.utils.ToastHelper;
 import com.android.mb.evergreen.widget.CleanableEditText;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
@@ -33,7 +39,6 @@ public class NewTestActivity extends BaseActivity implements View.OnClickListene
     private CleanableEditText mEtNum;
     private TextView mTvName;
     public static final int REQUEST_CODE_ALBUM = 0xf4;
-    public static final int REQUEST_CODE_PERMISSION = 0xd5;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,77 +142,63 @@ public class NewTestActivity extends BaseActivity implements View.OnClickListene
             ToastHelper.showLongToast("请输入样品编号");
             return;
         }
-        if (ContextCompat.checkSelfPermission(NewTestActivity.this,android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-            selectImage();
-        }else{
-            ActivityCompat.requestPermissions(NewTestActivity.this,new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_CODE_PERMISSION);
-        }
-    }
-
-    /**
-     * 图片选择
-     */
-    public void selectImage() {
-        Intent intent = new Intent(this, MultiImageSelectorActivity.class);
-        // 是否显示拍摄图片
-        intent.putExtra(MultiImageSelectorActivity.EXTRA_SHOW_CAMERA, true);
-        // 最大可选择图片数量
-        intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_COUNT, 1);
-        // 选择模式
-        intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_SINGLE);
-        startActivityForResult(intent, REQUEST_CODE_ALBUM);
-    }
-
-    /**
-     * 处理图片选择结果
-     * @param data
-     */
-    private void handleImageSelect(Intent data) {
-        if(null == data) {
-            return;
-        }
-        List<String> selectImages = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
-        if(null == selectImages || 0 == selectImages.size()) {
-            return;
-        }
-        String testName = mTvTestName.getText().toString().trim();
-        String testSerial = mEtSerial.getText().toString().trim();
-        String testNum = mEtNum.getText().toString().trim();
-        Bundle bundle = new Bundle();
-        bundle.putString("testName",testName);
-        bundle.putString("testSerial",testSerial);
-        bundle.putString("testNum",testNum);
-        bundle.putString("imagePath",selectImages.get(0));
-        NavigationHelper.startActivity(NewTestActivity.this,TestImageActivity.class,bundle,false);
+        startActivityForResult(new Intent(this, TestActivity.class), REQUEST_CODE_ALBUM);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_ALBUM) {
-            handleImageSelect(data);
+            handleImageSelect();
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    /**
+     * 处理图片选择结果
+     */
+    private void handleImageSelect() {
+        List<int[]> color2List = CameraColorPickerPreview.color2List;
+        int[] t = CameraColorPickerPreview.colorEnd(color2List);
+        BigDecimal tBigDecimal = RgbToGray(t);
+        String tvT_Data = "\nT线平均值RGB色码:" + t[0] + "," + t[1] + "," + t[2] + "\n" + "跟公式套用后结果：" + tBigDecimal;
+//        tvT.setText(tvT_Data);
 
-        if (requestCode == REQUEST_CODE_PERMISSION){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                selectImage();
-            }else{
-                ToastHelper.showToast("权限已被拒绝,请到设置页面打开存储权限");
-                startAppSettings();
+        List<int[]> colorList = CameraColorPickerPreview.colorList;
+        int[] c = CameraColorPickerPreview.colorEnd(colorList);
+        BigDecimal cBigDecimal = RgbToGray(c);
+        String tvC_Data = "\nC线平均值RGB色码:" + c[0] + "," + c[1] + "," + c[2] + "\n" + "跟公式套用后结果：" + cBigDecimal;
+//        tvC.setText(tvC_Data);
+
+        Double cData1 = new Double(String.valueOf(cBigDecimal));
+        Double cData = new Double(185.00);
+        String result;
+        if (cData1 >= cData) {
+            result = "Invalid : "+"\n C 线数值:"+cBigDecimal+"\n T 线数值:"+tBigDecimal + "\n C 线大于185.00";
+        } else {
+            Double tData1 = new Double(String.valueOf(tBigDecimal));
+            if (135 > tData1) {
+                result = "Negative : " +"\n C 线数值:"+cBigDecimal+"\n T 线数值:"+tBigDecimal + "\n C 线数值小于185.00" + "\n T 线数值小于135.00" ;
+            } else {
+                result = "Positive : " +"\n C 线数值:"+cBigDecimal+"\n T 线数值:"+tBigDecimal + "\n C 线数值小于185.00" + "\n T 线数值大于135.00" ;
             }
         }
 
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        String testName = mTvTestName.getText().toString().trim();
+        String testSerial = mEtSerial.getText().toString().trim();
+        String testNum = mEtNum.getText().toString().trim();
+        ExamineDao examineDao = GreenDaoManager.getInstance().getNewSession().getExamineDao();
+        Examine examine = new Examine(null,testName, Helper.date2String(new Date()),testSerial,testNum, CurrentUser.getInstance().getId(),CurrentUser.getInstance().getName(),result,"",false);
+        long id = examineDao.insert(examine);
+        Bundle bundle = new Bundle();
+        bundle.putLong("id",id);
+        NavigationHelper.startActivity(NewTestActivity.this,TestResultActivity.class,bundle,false);
     }
 
-    //打开系统应用设置(ACTION_APPLICATION_DETAILS_SETTINGS:系统设置权限)
-    private void startAppSettings() {
-        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        intent.setData(Uri.parse("package:" + getPackageName()));
-        startActivity(intent);
+    private BigDecimal RgbToGray(int[] data) {
+//        计算公式 gray=0.299red+0.587green+0.114blue
+        BigDecimal redData = new BigDecimal("0.299").multiply(new BigDecimal(data[0]));
+        BigDecimal greenData = new BigDecimal("0.587").multiply(new BigDecimal(data[1]));
+        BigDecimal blueData = new BigDecimal("0.114").multiply(new BigDecimal(data[2]));
+        return redData.add(greenData).add(blueData).setScale(2, RoundingMode.DOWN);
     }
 }

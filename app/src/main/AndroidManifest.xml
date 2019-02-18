@@ -5,6 +5,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
     <application
         android:name=".app.MBApplication"
         android:allowBackup="true"
@@ -53,6 +57,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.TestImageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.TestActivity"
             android:screenOrientation="portrait" />
         <!--图片多选页面-->
         <activity

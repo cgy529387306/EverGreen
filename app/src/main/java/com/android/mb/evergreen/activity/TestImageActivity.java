@@ -170,9 +170,9 @@ public class TestImageActivity extends BaseActivity implements View.OnClickListe
         ExamineDao examineDao = GreenDaoManager.getInstance().getNewSession().getExamineDao();
         Examine examine = new Examine(null,mTestName, Helper.date2String(new Date()),mTestSerial,mTestNum, CurrentUser.getInstance().getId(),CurrentUser.getInstance().getName(),result,mImagePath,false);
         long id = examineDao.insert(examine);
-//        Bundle bundle = new Bundle();
-//        bundle.putLong("id",id);
-//        NavigationHelper.startActivity(TestImageActivity.this,TestResultActivity.class,bundle,false);
+        Bundle bundle = new Bundle();
+        bundle.putLong("id",id);
+        NavigationHelper.startActivity(TestImageActivity.this,TestResultActivity.class,bundle,false);
     }
 
 }
