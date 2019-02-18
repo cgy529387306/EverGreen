@@ -3,11 +3,14 @@ package com.android.mb.evergreen.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.hardware.Camera;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -20,6 +23,13 @@ import android.widget.TextView;
 import com.android.mb.evergreen.R;
 import com.android.mb.evergreen.camera.CameraColorPickerPreview;
 import com.android.mb.evergreen.camera.Cameras;
+import com.android.mb.evergreen.utils.ImageUtil;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -189,12 +199,23 @@ public class TestActivity extends AppCompatActivity implements CameraColorPicker
         Camera c = null;
         try {
             c = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
-//闪光灯
-            Camera.Parameters parameters = c.getParameters();
+            //闪光灯
+            final Camera.Parameters parameters = c.getParameters();
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
             c.setParameters(parameters);
             c.autoFocus(new Camera.AutoFocusCallback() {
                 public void onAutoFocus(boolean success, Camera camera) {
+                    if (success){
+                        camera.cancelAutoFocus();//只有加上了这一句，才会自动对焦。
+                        if (!Build.MODEL.equals("KORIDY H30")) {
+                            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);// 连续自动对焦
+                            camera.setParameters(parameters);
+                        } else {
+                            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+                            camera.setParameters(parameters);
+                        }
+                     }
                 }
             });
             c.startPreview();
@@ -306,13 +327,78 @@ public class TestActivity extends AppCompatActivity implements CameraColorPicker
 
 
     public void btn_san(View view) {
+        if (CameraColorPickerPreview.colorList.size() == 30 && mCamera!=null) {
+            mCamera.takePicture(new Camera.ShutterCallback() {
+                @Override
+                public void onShutter() {
 
-        if (CameraColorPickerPreview.colorList.size() == 30) {
-            Intent i = new Intent();
-            i.putExtra("isBtnSan", "isBtnSan");
-            setResult(-1, i);
+                }
+            }, null, mPictureCallback);
         }
-        finish();
-
     }
+
+    private final Camera.PictureCallback mPictureCallback = new Camera.PictureCallback() {
+        @Override
+        public void onPictureTaken(byte[] data, Camera camera) {
+            SaveThread st = new SaveThread(data);
+            st.start();
+        }
+    };
+
+    class SaveThread extends Thread {
+        private byte[] mData;
+
+        public SaveThread(byte[] data) {
+            this.mData = data;
+        }
+
+        @Override
+        public void run() {
+            FileOutputStream b = null;
+            try {
+                // 保存到自定义路径
+                if (!new File(Environment.getExternalStorageDirectory()
+                        .getAbsolutePath() + File.separator + "EverGreen").exists()) {
+                    new File(Environment.getExternalStorageDirectory()
+                            .getAbsolutePath() + File.separator + "EverGreen")
+                            .mkdirs();
+                }
+                String imagePath = Environment.getExternalStorageDirectory()
+                        .getAbsolutePath()
+                        + File.separator
+                        + "EverGreen"
+                        + File.separator + new Date().getTime() + ".png";
+                b = new FileOutputStream(imagePath);
+                b.write(mData);
+                b.flush();
+                b.close();
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                    Intent mediaScanIntent = new Intent(
+                            Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                    Uri contentUri = Uri.fromFile(new File(imagePath)); //out is your output file
+                    mediaScanIntent.setData(contentUri);
+                    sendBroadcast(mediaScanIntent);
+                } else {
+                    sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"
+                            + Environment.getExternalStorageDirectory())));
+                }
+                Bitmap mSourceBitmap = ImageUtil.getLocalOrNetBitmap(imagePath);
+                if(mSourceBitmap != null) {
+                    Bitmap bitmapTrans = ImageUtil.rotaingImageView(mSourceBitmap, 90);
+                    if(bitmapTrans != null) {
+                        ImageUtil.saveImg(bitmapTrans, imagePath);
+                    }
+                }
+                Intent i = new Intent();
+                i.putExtra("imagePath", imagePath);
+                setResult(RESULT_OK, i);
+                finish();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

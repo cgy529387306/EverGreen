@@ -140,15 +140,19 @@ public class NewTestActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_ALBUM) {
-            handleImageSelect();
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_ALBUM) {
+            handleImageSelect(data);
         }
     }
 
     /**
      * 处理图片选择结果
      */
-    private void handleImageSelect() {
+    private void handleImageSelect(Intent data) {
+        if (data==null){
+            return;
+        }
+        String imagePath = data.getStringExtra("imagePath");
         List<int[]> color2List = CameraColorPickerPreview.color2List;
         int[] t = CameraColorPickerPreview.colorEnd(color2List);
         BigDecimal tBigDecimal = RgbToGray(t);
@@ -179,7 +183,7 @@ public class NewTestActivity extends BaseActivity implements View.OnClickListene
         String testSerial = mEtSerial.getText().toString().trim();
         String testNum = mEtNum.getText().toString().trim();
         ExamineDao examineDao = GreenDaoManager.getInstance().getNewSession().getExamineDao();
-        Examine examine = new Examine(null,testName, Helper.date2String(new Date()),testSerial,testNum, CurrentUser.getInstance().getId(),CurrentUser.getInstance().getName(),result,"",false);
+        Examine examine = new Examine(null,testName, Helper.date2String(new Date()),testSerial,testNum, CurrentUser.getInstance().getId(),CurrentUser.getInstance().getName(),result,imagePath,false);
         long id = examineDao.insert(examine);
         Bundle bundle = new Bundle();
         bundle.putLong("id",id);
