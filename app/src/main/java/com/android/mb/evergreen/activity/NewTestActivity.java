@@ -1,9 +1,11 @@
 package com.android.mb.evergreen.activity;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,12 +20,15 @@ import com.android.mb.evergreen.utils.Helper;
 import com.android.mb.evergreen.utils.NavigationHelper;
 import com.android.mb.evergreen.utils.ToastHelper;
 import com.android.mb.evergreen.widget.CleanableEditText;
+import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import rx.functions.Action1;
 
 public class NewTestActivity extends BaseActivity implements View.OnClickListener{
     private TextView mTvTestName;
@@ -134,7 +139,20 @@ public class NewTestActivity extends BaseActivity implements View.OnClickListene
             ToastHelper.showLongToast("请输入样品编号");
             return;
         }
-        startActivityForResult(new Intent(this, TestActivity.class), REQUEST_CODE_ALBUM);
+        RxPermissions.getInstance(NewTestActivity.this)
+                .request(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.CAMERA)//这里填写所需要的权限
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (aBoolean) {//true表示获取权限成功（注意这里在android6.0以下默认为true）
+                            startActivityForResult(new Intent(NewTestActivity.this, TestActivity.class), REQUEST_CODE_ALBUM);
+                        } else {
+                            ToastHelper.showToast("请先打开存储权限");
+                            Log.i("permissions", Manifest.permission.READ_CALENDAR + "：获取失败" );
+                        }
+                    }
+                });
+
     }
 
     @Override

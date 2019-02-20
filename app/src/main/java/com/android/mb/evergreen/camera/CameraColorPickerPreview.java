@@ -3,7 +3,6 @@ package com.android.mb.evergreen.camera;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.TextureView;
 import android.view.View;
 
